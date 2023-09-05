@@ -1,3 +1,23 @@
+## 1.0.0 (2023-09-05)
+
+
+### Features
+
+* add database design ([88286d2](https://github.com/PaoloPenazzi/web-report/commit/88286d235701b4ef36485d171e3c38eea25cf0f4))
+* add sections ([615596b](https://github.com/PaoloPenazzi/web-report/commit/615596be948787292778da646a984dac81cb2dea))
+* design chapter and mockup images ([c016a1d](https://github.com/PaoloPenazzi/web-report/commit/c016a1d7b67a241e9cb95560122c5eb266fbf9a6))
+
+
+### Bug Fixes
+
+* broken itemize ([4ef48fc](https://github.com/PaoloPenazzi/web-report/commit/4ef48fc3a7941c70d3c814524d081b49380bd913))
+
+
+### General maintenance
+
+* create README.md ([ac655f7](https://github.com/PaoloPenazzi/web-report/commit/ac655f74a92abfd18514bf84d65b4b6c9b69d126))
+* resolve merge conflict ([dd63e21](https://github.com/PaoloPenazzi/web-report/commit/dd63e21affdc27d64d7c85e2dbc0c9226e389b0b))
+
 ## [1.1.0](https://github.com/PaoloPenazzi/latex-template/compare/1.0.0...1.1.0) (2023-08-25)
 
 
