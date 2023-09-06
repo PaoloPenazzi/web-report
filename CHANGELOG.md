@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/PaoloPenazzi/web-report/compare/1.1.0...1.2.0) (2023-09-06)
+
+
+### Features
+
+* add routes table ([d95ca50](https://github.com/PaoloPenazzi/web-report/commit/d95ca50eb0a1f03f73f9faa0529e8a897e249ada))
+
 ## [1.1.0](https://github.com/PaoloPenazzi/web-report/compare/1.0.0...1.1.0) (2023-09-06)
 
 
