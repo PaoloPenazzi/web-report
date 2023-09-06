@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/PaoloPenazzi/web-report/compare/1.3.1...1.3.2) (2023-09-06)
+
+
+### Bug Fixes
+
+* move from conclusion to design ([df0cecc](https://github.com/PaoloPenazzi/web-report/commit/df0ceccd1f0f0fc74dd043b3ed9b55eaa3d07fa4))
+
 ## [1.3.1](https://github.com/PaoloPenazzi/web-report/compare/1.3.0...1.3.1) (2023-09-06)
 
 
