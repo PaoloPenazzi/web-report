@@ -1,1 +1,10 @@
 \section*{Deployment}
+
+Docker offre un ambiente di containerizzazione che permette di confezionare l'applicazione web e il database MongoDB insieme, garantendo che siano consistenti e facili da distribuire su qualsiasi ambiente, indipendentemente dalle differenze di configurazione.
+
+È stato quindi creato un Dockerfile per buildare l'immagine del server, e un docker-compose.yaml per orchestrare il deployment dell'applicazione web e del database.
+
+Il Dockerfile è multistep per minimizzare il peso dell'immagine finale. La prima immagine è più pesante e contiene tutte le dipendenze necessarie per buildare, mentre la seconda solo quelle necessarie a runtime.
+
+Per lo sviluppo in locale, al posto di docker è conveniente utilizzare yarn dev, a patto di avere un servizio mongo locale che runna sulla porta standard 27017.
+
