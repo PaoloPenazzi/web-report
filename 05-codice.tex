@@ -1,1 +1,223 @@
 \section*{Codice}
+
+\subsection*{Credentials}
+Il Credentials schema include le funzioni per salare la password e per verificare la correttezza della password inserita dall'utente in fase di login.
+\begin{verbatim}
+  credentialsSchema.pre<ICredentials>('save', function (next) {
+  const credentials = this as ICredentials;
+
+  // only hash the password if it has been modified (or is new)
+  if (!credentials.isModified('password')) return next();
+
+  // generate a salt
+  bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
+    if (err) return next(err);
+
+    // hash the password using our new salt
+    bcrypt.hash(credentials.password, salt, function (err, hash) {
+      if (err) return next(err);
+
+      // override the cleartext password with the hashed one
+      credentials.password = hash;
+      next();
+    });
+  });
+  });
+
+credentialsSchema.methods.comparePassword = function (candidatePassword: string, cb: (err: Error | null, isMatch?: boolean) => void) {
+  bcrypt.compare(candidatePassword, this.password, function (err, result) {
+    if (err) return cb(err);
+    cb(null, result === true);
+  });
+};
+
+const Credentials = models.Credentials || model('Credentials', credentialsSchema, 'credentials');
+
+export type { ICredentialsData };
+export { Credentials };
+
+\end{verbatim}
+
+
+\subsection*{Esempio di definizione API NextJS}
+Di seguito il file pages/api/data/get.ts, che definisce l'API per ottenere i dati da visualizzare nelle dashboard. L'API verrà automaticamente esposta da NextJS alla route /api/data/get e il codice dell'handler verrà automaticamente eseguito lato server.
+
+\begin{verbatim}
+import type { NextApiRequest, NextApiResponse } from "next/types";
+import { Data } from "../../../@db/schemas/data"
+import connectToDatabase from "../../../@db/database"
+
+connectToDatabase()
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method === 'GET') {
+        try {
+            const { objective, username } = req.query;
+            const data = await Data.find({ objective: objective, username: username });
+            console.log('[SERVER] found data: \n' + data);
+            res.status(200).json(data);
+        } catch (error) {
+            res.status(500).json({ error: 'Failed to retrieve data from the database' });
+        }
+    } else {
+      
+        res.status(400).json({ error: 'Invalid request method' });
+    }
+}
+\end{verbatim}
+
+
+Per rendere le API accessibili solo agli utenti loggati, è stato utilizzato il middleware di NextJS, che permette di eseguire del codice prima di eseguire l'handler dell'API. Il middleware controlla che l'utente sia loggato, e in caso contrario restituisce un errore 401 (Unauthorized).
+In futuro, questo middleware dovrà anche implementare una verifica che l'utente sia effettivamente autorizzato ad accedere ai dati richiesti (authorization).
+
+\begin{verbatim}
+import { NextApiRequest, NextApiResponse } from "next/types";
+import jwt from "jsonwebtoken";
+
+const jwtConfig = {
+  secret: process.env.NEXT_PUBLIC_JWT_SECRET as string,
+};
+
+export const authMiddleware = (handler: (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => Promise<void>) => async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
+  try {
+    const token = req.headers.authorization?.replace("Bearer ", "");
+
+    if (!token) {
+      return res.status(401).json({ error: "Authorization token not provided" });
+    }
+
+    jwt.verify(token, jwtConfig.secret, (err, decoded) => {
+      if (err) {
+        return res.status(401).json({ error: "Invalid authorization token" });
+      }
+
+      console.log(decoded)
+
+      // If the token is valid, call the original API handler
+      return handler(req, res);
+    });
+  } catch (error) {
+    res.status(500).json({ error: "An error occurred during authentication" });
+  }
+};
+\end{verbatim}
+
+
+\subsection*{Autenticazione}
+
+Per ottenere un codice più pulito, è stato fatto buon uso dei Context di React. Un ottimo esempio è l'AuthContext.tsx, che permette di accedere alle informazioni sulla sessione attuale a tutti i componenti figli di AuthProvider.
+
+\begin{verbatim}
+  const defaultProvider: AuthValuesType = {
+  user: null,
+  loading: true,
+  setUser: () => null,
+  setLoading: () => Boolean,
+  login: () => Promise.resolve(),
+  logout: () => Promise.resolve()
+}
+
+const AuthContext = createContext(defaultProvider)
+
+type Props = {
+  children: ReactNode
+}
+
+const AuthProvider = ({ children }: Props) => {
+  // ** States
+  const [user, setUser] = useState<UserDataType | null>(defaultProvider.user)
+  const [loading, setLoading] = useState<boolean>(defaultProvider.loading)
+
+  // ** Hooks
+  const router = useRouter()
+
+  useEffect(() => {
+    const initAuth = async (): Promise<void> => {
+      const storedToken = window.localStorage.getItem(authConfig.storageTokenKeyName)!
+      if (storedToken) {
+        setLoading(true)
+        await axios
+          .get(authConfig.meEndpoint, {
+            headers: {
+              Authorization: storedToken
+            }
+          })
+          .then(async response => {
+            setLoading(false)
+            setUser({ ...response.data.userData })
+
+             // Set access token in localStorage
+             window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken);
+          })
+          .catch(() => {
+            localStorage.removeItem('userData')
+            localStorage.removeItem('refreshToken')
+            localStorage.removeItem('accessToken')
+            setUser(null)
+            setLoading(false)
+            if (authConfig.onTokenExpiration === 'logout' && !router.pathname.includes('login')) {
+              router.replace('/login')
+            }
+          })
+      } else {
+        setLoading(false)
+      }
+    }
+
+    initAuth()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handleLogin = (params: LoginParams, errorCallback?: ErrCallbackType) => {
+    axios
+      .post(authConfig.loginEndpoint, params)
+      .then(async response => {
+        params.rememberMe
+          ? window.localStorage.setItem(authConfig.storageTokenKeyName, response.data.accessToken)
+          : null
+        const returnUrl = router.query.returnUrl
+
+        setUser({ ...response.data.userData })
+        params.rememberMe ? window.localStorage.setItem('userData', JSON.stringify(response.data.userData)) : null
+
+        const redirectURL = returnUrl && returnUrl !== '/' ? returnUrl : '/'
+
+        router.replace(redirectURL as string)
+      })
+
+      .catch(err => {
+        if (errorCallback) errorCallback(err)
+      })
+  }
+
+  const handleLogout = () => {
+    setUser(null)
+    window.localStorage.removeItem('userData')
+    window.localStorage.removeItem(authConfig.storageTokenKeyName)
+    router.push('/login')
+  }
+
+  const values = {
+    user,
+    loading,
+    setUser,
+    setLoading,
+    login: handleLogin,
+    logout: handleLogout
+  }
+
+  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
+}
+
+export { AuthContext, AuthProvider }
+\end{verbatim}
+
+
+
+

@@ -6,5 +6,36 @@ Docker offre un ambiente di containerizzazione che permette di confezionare l'ap
 
 Il Dockerfile è multistep per minimizzare il peso dell'immagine finale. La prima immagine è più pesante e contiene tutte le dipendenze necessarie per buildare, mentre la seconda solo quelle necessarie a runtime.
 
-Per lo sviluppo in locale, al posto di docker è conveniente utilizzare yarn dev, a patto di avere un servizio mongo locale che runna sulla porta standard 27017.
+Il docker compose è attualmente configurato per l'utilizzo sul server nel quale è stato effettuato il deployment, ma può essere facilmente adattato per l'utilizzo in locale:
+
+\begin{verbatim}
+version: '3'
+
+services:
+
+  mongo:
+    container_name: mongo
+    image: mongo:4.4.18
+    volumes:
+      - mongodb_data:/data/db
+    restart: always
+    ports:
+      - "27017:27017"
+
+  server:
+    container_name: server
+    ports:
+      - "3033:3033"
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - mongo
+    # environment:
+      # - MONGODB=mongodb://mongo
+
+volumes:
+  mongodb_data:
+
+\end{verbatim}
 
