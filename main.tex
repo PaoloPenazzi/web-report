@@ -7,6 +7,7 @@
 \usepackage[inline]{enumitem}
 \usepackage{graphicx}
 \usepackage{cleveref}
+\usepackage{geometry}
 
 \graphicspath{ {img/} }
 
@@ -15,21 +16,17 @@
 \newcommand{\versionpatch}{0}
 \newcommand{\version}{\versionmajor.\versionminor.\versionpatch}
 
-\title{FILL THIS}
-\author{FILL THIS}
-
 \begin{document}
 	
-\maketitle
-% OR
- \input{01-intro.tex}
- \input{02-requisiti.tex}
- \input{03-design.tex}
- \input{04-tecnologie.tex}
- \input{05-codice.tex}
- \input{06-test.tex}
- \input{07-deployment.tex}
- \input{08-conclusioni.tex}
+\input{front.tex}
+\input{01-intro.tex}
+\input{02-requisiti.tex}
+\input{03-design.tex}
+\input{04-tecnologie.tex}
+\input{05-codice.tex}
+\input{06-test.tex}
+\input{07-deployment.tex}
+\input{08-conclusioni.tex}
 
 %----------------------------------------------------------------------------------------
 % BIBLIOGRAPHY
