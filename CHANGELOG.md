@@ -1,3 +1,10 @@
+## [1.4.0](https://github.com/PaoloPenazzi/web-report/compare/1.3.2...1.4.0) (2023-09-06)
+
+
+### Features
+
+* add code and docker compose local example ([28f3a7f](https://github.com/PaoloPenazzi/web-report/commit/28f3a7fd771b8e9151e07a85c1ae2fccc4c97612))
+
 ## [1.3.2](https://github.com/PaoloPenazzi/web-report/compare/1.3.1...1.3.2) (2023-09-06)
 
 
