@@ -1,3 +1,17 @@
+## [1.3.1](https://github.com/PaoloPenazzi/web-report/compare/1.3.0...1.3.1) (2023-09-06)
+
+
+### Bug Fixes
+
+* image positioning ([bef1158](https://github.com/PaoloPenazzi/web-report/commit/bef115889c69676da1d4025e6e38b9d2154ec0df))
+
+## [1.3.0](https://github.com/PaoloPenazzi/web-report/compare/1.2.0...1.3.0) (2023-09-06)
+
+
+### Features
+
+* write deployment ([9f1318f](https://github.com/PaoloPenazzi/web-report/commit/9f1318fb5ccd3f00140c5cad64659f83406ef84d))
+
 ## [1.2.0](https://github.com/PaoloPenazzi/web-report/compare/1.1.0...1.2.0) (2023-09-06)
 
 
