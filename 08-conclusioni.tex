@@ -1,5 +1,7 @@
 
-\subsection{Design del database}
+\subsection{Backend}
+
+\subsubsection{Database schemas}
 
 Il design del database è stato effettuato sulla base delle richieste del cliente.
 L'azienda ci ha fornito un file excel contenente tutti i dati che dovevano essere inseriti nel database.
@@ -107,3 +109,30 @@ const dataSchema = new Schema({
 \end{verbatim}
 
 Nel Data schema sono contenuti i valori reali di un utente per un obiettivo in una determinata data.
+
+\subsubsection{API}
+
+Le API utilizzano Next.js API routes. Questo framework permette di creare delle API RESTful in modo molto semplice.
+
+Di sono mostrate le routes create:
+
+\begin{table}[]
+    \begin{tabular}{ll}
+    users/put             & Aggiunge uno o più utenti al database (gli utenti già esistenti vengono aggiornati).                     \\
+    users/get             & Recupera un utente dal database (nel caso non venga specificato uno username, ritorna tutti gli utenti). \\
+    users/delete          & Rimuove un utente dal database e come manager di altri utenti, insieme agli obiettivi a lui assegnati.   \\
+    users/update/manager  & Aggiorna il manager di un utente.                                                                        \\
+    users/update/position & Aggiorna la posizione di un utente.                                                                      \\
+    objectives/put        & Aggiunge uno o più obiettivi al database (gli obiettivi già esistenti vengono aggiornati)                \\
+    objectives/get        & Recupera un obiettivo dal database (nel caso non venga specificato un nome obiettivo, li ritorna tutti)  \\
+    objectives/delete     & Rimuove un obiettivo dal database.                                                                       \\
+    assigned/put          & Assegna un obiettivo ad un utente, o più obiettivi a più utenti.                                         \\
+    assigned/get          & Dato un utente, recupera tutti gli obiettivi a lui assegnati.                                            \\
+    assigned/deleteAll    & Rimuove tutti gli obiettivi assegnati.                                                                   \\
+    data/put              & Aggiunge (o aggiorna) i valori per un utente, relativi ad un obiettivo.                                  \\
+    data/get              & Recupera i valori di un utente per un obiettivo.                                                         \\
+    data/deleteAll        & Rimuove tutti i valori                                                                                   \\
+    auth/me               & TODO                                                                                                     \\
+    auth/login            & TODO                                                                                                    
+    \end{tabular}
+\end{table}
