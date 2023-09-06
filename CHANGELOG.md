@@ -1,3 +1,16 @@
+## [1.1.0](https://github.com/PaoloPenazzi/web-report/compare/1.0.0...1.1.0) (2023-09-06)
+
+
+### Features
+
+* update front page ([ad807e4](https://github.com/PaoloPenazzi/web-report/commit/ad807e43c1876d71f2afc9966d3c45f04e83ef55))
+
+
+### General maintenance
+
+* add geometry package ([a17e21e](https://github.com/PaoloPenazzi/web-report/commit/a17e21ef2a246c297eb4eecdffd727696a16ab82))
+* add paragraphs ([7e6ef73](https://github.com/PaoloPenazzi/web-report/commit/7e6ef7399ee7aa9ced03ce9a663a2e4f0cfee8d5))
+
 ## 1.0.0 (2023-09-05)
 
 
