@@ -1,3 +1,17 @@
+## [1.6.0](https://github.com/PaoloPenazzi/web-report/compare/1.5.0...1.6.0) (2023-09-07)
+
+
+### Features
+
+* complete routes table ([dce14f6](https://github.com/PaoloPenazzi/web-report/commit/dce14f66998fce83170aa2488ef83e517c590edb))
+
+## [1.5.0](https://github.com/PaoloPenazzi/web-report/compare/1.4.0...1.5.0) (2023-09-07)
+
+
+### Features
+
+* mention materio ([c2e4bd9](https://github.com/PaoloPenazzi/web-report/commit/c2e4bd9d4a6af14cb8756c75b94b74e6e4200b54))
+
 ## [1.4.0](https://github.com/PaoloPenazzi/web-report/compare/1.3.2...1.4.0) (2023-09-06)
 
 

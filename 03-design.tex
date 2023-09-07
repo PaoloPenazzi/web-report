@@ -161,41 +161,25 @@ Di seguito sono mostrate le routes create:
     \toprule
     \textbf{Endpoint} & \textbf{Descrizione} \\
     \midrule
-    users/put & Aggiunge uno o più utenti al database (gli utenti già esistenti vengono aggiornati). \\
-    \hline
-    users/get & Recupera un utente dal database (nel caso non venga specificato uno username, ritorna tutti gli utenti). \\
-    \hline
-    users/delete & Rimuove un utente dal database e come manager di altri utenti, insieme agli obiettivi a lui assegnati. \\
-    \hline
-    users/update/manager & Aggiorna il manager di un utente. \\
-    \hline
-    users/update/position & Aggiorna la posizione di un utente. \\
-    \hline
-    objectives/put & Aggiunge uno o più obiettivi al database (gli obiettivi già esistenti vengono aggiornati). \\
-    \hline
-    objectives/get & Recupera un obiettivo dal database (nel caso non venga specificato un nome obiettivo, li ritorna tutti). \\
-    \hline
-    objectives/delete & Rimuove un obiettivo dal database. \\
-    \hline
-    assigned/put & Assegna un obiettivo ad un utente, o più obiettivi a più utenti. \\
-    \hline
-    assigned/get & Dato un utente, recupera tutti gli obiettivi a lui assegnati. \\
-    \hline
-    assigned/deleteAll & Rimuove tutti gli obiettivi assegnati. \\
-    \hline
-    data/put & Aggiunge (o aggiorna) i valori per un utente, relativi ad un obiettivo. \\
-    \hline
-    data/get & Recupera i valori di un utente per un obiettivo. \\
-    \hline
-    data/deleteAll & Rimuove tutti i valori. \\
-    \hline
-    auth/me & TODO \\
-    \hline
-    auth/login & TODO \\
+    users/put & Aggiunge uno o più utenti al database (gli utenti già esistenti vengono aggiornati). \\ \hline
+    users/get & Recupera un utente dal database (nel caso non venga specificato uno username, ritorna tutti gli utenti). \\ \hline
+    users/delete & Rimuove un utente dal database e come manager di altri utenti, insieme agli obiettivi a lui assegnati. \\ \hline
+    users/update/manager & Aggiorna il manager di un utente. \\ \hline
+    users/update/position & Aggiorna la posizione di un utente. \\ \hline
+    objectives/put & Aggiunge uno o più obiettivi al database (gli obiettivi già esistenti vengono aggiornati). \\ \hline
+    objectives/get & Recupera un obiettivo dal database (nel caso non venga specificato un nome obiettivo, li ritorna tutti). \\ \hline
+    objectives/delete & Rimuove un obiettivo dal database. \\ \hline
+    assigned/put & Assegna un obiettivo ad un utente, o più obiettivi a più utenti. \\ \hline
+    assigned/get & Dato un utente, recupera tutti gli obiettivi a lui assegnati. \\ \hline
+    assigned/deleteAll & Rimuove tutti gli obiettivi assegnati. \\ \hline
+    data/put & Aggiunge (o aggiorna) i valori per un utente, relativi ad un obiettivo. \\ \hline
+    data/get & Recupera i valori di un utente per un obiettivo. \\ \hline
+    data/deleteAll & Rimuove tutti i valori. \\ \hline
+    auth/me & Verifica che il token JWT sia valido e non scaduto \\ \hline
+    auth/login & Verifica le credenziali dell'utente e se sono valide, genera un JWT \\
     \bottomrule
     \end{tabular}
     \caption{Descrizione delle operazioni API}
     \label{tab:api_operations}
     \end{table}
-
 \newpage
