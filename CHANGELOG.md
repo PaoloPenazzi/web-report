@@ -1,3 +1,15 @@
+## [1.7.0](https://github.com/PaoloPenazzi/web-report/compare/1.6.0...1.7.0) (2023-09-07)
+
+
+### Features
+
+* conclusioni ([5078d9d](https://github.com/PaoloPenazzi/web-report/commit/5078d9d8a2bb78be35a6ddc2892515d4e88bcf18))
+
+
+### Refactoring
+
+* change page spacing ([f491c65](https://github.com/PaoloPenazzi/web-report/commit/f491c65515724e334bda867c6f29d554e7bea45d))
+
 ## [1.6.0](https://github.com/PaoloPenazzi/web-report/compare/1.5.0...1.6.0) (2023-09-07)
 
 
